@@ -96,7 +96,7 @@ def recognize(q, a):
     thiswords = thises([(q,)])
     print('Thiswords: ', thiswords)
     for category in l:
-        similarity_points[l[category]['Name']] = similarity(thiswords, l[category]['This']) + l[category]['Answerline'].count(a)
+        similarity_points[l[category]['Name']] = similarity(thiswords, l[category]['This']) * l[category]['Answerline'].count(a)
         #similarity_points[category['Name']] = len(set(thiswords).intersection(set(category['This']))) + len([answer for answer in category['Answerline'] if answer==a])
     return similarity_points
 
