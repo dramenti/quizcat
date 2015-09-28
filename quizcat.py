@@ -3,43 +3,6 @@ import os
 import json
 import sqlite3
 
-class Tossup:
-    def __init__(self, Tournament, Year, Round, Number, Category, Subcategory, ID, Question, Answer):
-        """
-        Constructs a Tossup object from the string parameters:
-        Tournament, Year, Round, Number, Category, Subcategory,
-        Question, Answer.
-        Each field is stripped of whitespace with str.strip method
-        """
-        self.Tournament = Tournament.strip()
-        self.Year = Year.strip()
-        self.Round = Round.strip()
-        self.Number = Number.strip()
-        self.Category = Category.strip()
-        self.Subcategory = Subcategory.strip()
-        self.Question = Question.strip()
-        self.Answer = Answer.strip()
-        self.ID = ID.strip()
-    def as_tuple(self):
-        """
-        Returns Tossup as a tuple 
-        """
-        return (self.Tournament, self.Year, self.Round, self.Number, self.Category, self.Subcategory, self.ID, self.Question, self.Answer)
-    def as_dictionary(self):
-        """
-        Returns Tossup as a dictionary, making it serializable
-        """
-        return {
-            "Tournament": self.Tournament,
-            "Year": self.Year,
-            "Round": self.Round,
-            "Number": self.Number,
-            "Category": self.Category,
-            "Subcategory": self.Subcategory,
-            "Question": self.Question,
-            "Answer": self.Answer,
-            "ID": self.ID
-        }
 #note: only handles 1 subcategory at a time
 def parsing(filename):
     s = None
@@ -58,15 +21,6 @@ def parsing(filename):
     #return tuple_tossups
     #the following is commented out; it is for database-less storage with json
     #(i.e. PLEASE IGNORE)
-    """
-    catsubcat = (json_tossups[0]['Category'], json_tossups[0]['Subcategory'])
-    for t in json_tossups:
-        if (t['Category'], t['Subcategory']) != catsubcat:
-            print("Category error: expected", catsubcat, "but got", (t['Category'], t['Subcategory']))
-            return None
-    with open('Database/' + catsubcat [0] + '/' + catsubcat[1] + '/' + catsubcat[1] + '.json', 'w') as out:
-        json.dump(json_tossups, out, sort_keys = True, indent = 4, ensure_ascii=False)
-    """
 def storeTossups(filename):
     tossups = parsing(filename)
     conn = sqlite3.connect('db.sqlite')
