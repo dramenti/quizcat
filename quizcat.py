@@ -15,12 +15,6 @@ def parsing(filename):
 
     tossups = map(lambda t: tuple(map(str.strip, t)), matches) #apply strip to data
     return list(tossups)
-    #for m in matches:
-     #   tossups.append(Tossup(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]))
-    #tuple_tossups = map(Tossup.as_tuple, tossups) 
-    #return tuple_tossups
-    #the following is commented out; it is for database-less storage with json
-    #(i.e. PLEASE IGNORE)
 def storeTossups(filename):
     tossups = parsing(filename)
     conn = sqlite3.connect('db.sqlite')
